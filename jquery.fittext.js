@@ -10,13 +10,15 @@ $.fn.fitText = function( options = {} ) {
 
 	const { compressor, minFontSize, maxFontSize } = settings
 
-	return this.each(function() {
+	const $elements = this
+
+	return $elements.each(function() {
 		// Store the object
-		let $this = $(this)
+		const $element = $(this)
 
 		// Resizer() resizes items based on the object width divided by the compressor * 10
-		let resizer = function () {
-			$this.css("font-size", Math.max(Math.min($this.width() / (compressor*10), maxFontSize), minFontSize))
+		const resizer = function () {
+			$element.css("font-size", Math.max(Math.min($element.width() / (compressor*10), maxFontSize), minFontSize))
 		}
 
 		// Call once to set.
