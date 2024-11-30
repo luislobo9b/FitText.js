@@ -19,13 +19,16 @@ $.fn.fitText = function( options = {} ) {
 
 		// Resizer() resizes items based on the object width divided by the compressor * 10
 		const resizer = () => {
-			$element.css("font-size", Math.max(Math.min($element.width() / (compressor*10), maxFontSize), minFontSize))
+			$element.css("font-size", limiter($element.width() / (compressor * 10), minFontSize, maxFontSize))
 		}
 
 		// Call once to set.
 		resizer()
 
-		// Call on resize. Opera debounces their resize by default.
+		function limiter(number, min, max) {
+			return Math.max(Math.min(number, max), min)
+		}
+
 		window.addEventListener("resize", resizer)
 		window.addEventListener("orientationchange", resizer)
 	})
