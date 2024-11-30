@@ -1,12 +1,14 @@
 $.fn.fitText = function( options = {} ) {
 	// Setup options
-			settings = $.extend({
-				compressor: 1,
-				minFontSize : -Infinity,
-				maxFontSize : Infinity
-			}, options)
-			settings.minFontSize = parseFloat(settings.minFontSize)
-			settings.maxFontSize = parseFloat(settings.maxFontSize)
+	settings = $.extend({
+		compressor: 1,
+		minFontSize : -Infinity,
+		maxFontSize : Infinity
+	}, options)
+	settings.minFontSize = parseFloat(settings.minFontSize)
+	settings.maxFontSize = parseFloat(settings.maxFontSize)
+
+	const { compressor, minFontSize, maxFontSize } = settings
 
 	return this.each(function() {
 		// Store the object
@@ -14,7 +16,7 @@ $.fn.fitText = function( options = {} ) {
 
 		// Resizer() resizes items based on the object width divided by the compressor * 10
 		let resizer = function () {
-			$this.css("font-size", Math.max(Math.min($this.width() / (settings.compressor*10), settings.maxFontSize), settings.minFontSize))
+			$this.css("font-size", Math.max(Math.min($this.width() / (compressor*10), maxFontSize), minFontSize))
 		}
 
 		// Call once to set.
