@@ -14,7 +14,7 @@ $.fn.fitText = function( options = {} ) {
 	return $elements.each((_, element) => {
 		const $element = $(element)
 
-		const resizer = () => {
+		function resizer() {
 			$element.css("font-size", limiter($element.width() / (compressor * 10), minFontSize, maxFontSize))
 		}
 
