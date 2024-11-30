@@ -1,7 +1,7 @@
-$.fn.fitText = function( kompressor, options ) {
+$.fn.fitText = function( options = {} ) {
 	// Setup options
-	let compressor = kompressor || 1,
 			settings = $.extend({
+				compressor: 1,
 				minFontSize : -Infinity,
 				maxFontSize : Infinity
 			}, options)
@@ -12,7 +12,7 @@ $.fn.fitText = function( kompressor, options ) {
 
 		// Resizer() resizes items based on the object width divided by the compressor * 10
 		let resizer = function () {
-			$this.css("font-size", Math.max(Math.min($this.width() / (compressor*10), parseFloat(settings.maxFontSize)), parseFloat(settings.minFontSize)))
+			$this.css("font-size", Math.max(Math.min($this.width() / (settings.compressor*10), parseFloat(settings.maxFontSize)), parseFloat(settings.minFontSize)))
 		}
 
 		// Call once to set.
