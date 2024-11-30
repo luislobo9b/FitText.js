@@ -1,4 +1,6 @@
-$.fn.fitText = function( options = {} ) {
+$.fn.fitText = fitText
+
+function fitText(options = {}) {
 	options = {
 		compressor: 1,
 		minFontSize : -Infinity,
@@ -8,10 +10,10 @@ $.fn.fitText = function( options = {} ) {
 	options.minFontSize = parseFloat(options.minFontSize)
 	options.maxFontSize = parseFloat(options.maxFontSize)
 
-	const { compressor, minFontSize, maxFontSize } = options
-	const $elements = this
+	const { compressor, minFontSize, maxFontSize } = options,
+		$elements = this
 
-	return $elements.each((_, element) => {
+	$elements.each((_, element) => {
 		const $element = $(element)
 
 		resizer()
