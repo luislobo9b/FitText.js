@@ -14,17 +14,16 @@ $.fn.fitText = function( options = {} ) {
 	return $elements.each((_, element) => {
 		const $element = $(element)
 
+		resizer()
+		window.addEventListener("resize", resizer)
+		window.addEventListener("orientationchange", resizer)
+
 		function resizer() {
 			$element.css("font-size", limiter($element.width() / (compressor * 10), minFontSize, maxFontSize))
 		}
 
-		resizer()
-
 		function limiter(number, min, max) {
 			return Math.max(Math.min(number, max), min)
 		}
-
-		window.addEventListener("resize", resizer)
-		window.addEventListener("orientationchange", resizer)
 	})
 }
