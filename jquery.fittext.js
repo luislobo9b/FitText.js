@@ -1,6 +1,6 @@
-$.fn.fitText = fitText
+function fitText(elements, options = {}) {
+	elements = Array.isArray(elements) ? elements : [elements]
 
-function fitText(options = {}) {
 	options = {
 		compressor: 1,
 		minFontSize : -Infinity,
@@ -10,18 +10,19 @@ function fitText(options = {}) {
 	options.minFontSize = parseFloat(options.minFontSize)
 	options.maxFontSize = parseFloat(options.maxFontSize)
 
-	const { compressor, minFontSize, maxFontSize } = options,
-		$elements = this
+	const { compressor, minFontSize, maxFontSize } = options
 
-	$elements.each((_, element) => {
-		const $element = $(element)
-
+	elements.forEach(element => {
 		resizer()
 		window.addEventListener("resize", resizer)
 		window.addEventListener("orientationchange", resizer)
 
 		function resizer() {
-			$element.css("font-size", limiter($element.width() / (compressor * 10), minFontSize, maxFontSize))
+			element.style.fontSize = limiter(getElementWidth(element) / (compressor * 10), minFontSize, maxFontSize) + "px"
+		}
+
+		function getElementWidth(element) {
+			return Math.max(element.scrollWidth, element.offsetWidth, element.clientWidth)
 		}
 
 		function limiter(number, min, max) {
