@@ -12,12 +12,12 @@ $.fn.fitText = function( options = {} ) {
 
 	const $elements = this
 
-	return $elements.each(function() {
+	return $elements.each((_, element) => {
 		// Store the object
-		const $element = $(this)
+		const $element = $(element)
 
 		// Resizer() resizes items based on the object width divided by the compressor * 10
-		const resizer = function () {
+		const resizer = () => {
 			$element.css("font-size", Math.max(Math.min($element.width() / (compressor*10), maxFontSize), minFontSize))
 		}
 
