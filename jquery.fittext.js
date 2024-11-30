@@ -1,14 +1,15 @@
 $.fn.fitText = function( options = {} ) {
 	// Setup options
-	settings = $.extend({
+	options = {
 		compressor: 1,
 		minFontSize : -Infinity,
-		maxFontSize : Infinity
-	}, options)
-	settings.minFontSize = parseFloat(settings.minFontSize)
-	settings.maxFontSize = parseFloat(settings.maxFontSize)
+		maxFontSize : Infinity,
+		...options
+	}
+	options.minFontSize = parseFloat(options.minFontSize)
+	options.maxFontSize = parseFloat(options.maxFontSize)
 
-	const { compressor, minFontSize, maxFontSize } = settings
+	const { compressor, minFontSize, maxFontSize } = options
 
 	const $elements = this
 
@@ -25,6 +26,7 @@ $.fn.fitText = function( options = {} ) {
 		resizer()
 
 		// Call on resize. Opera debounces their resize by default.
-		$(window).on("resize.fittext orientationchange.fittext", resizer)
+		window.addEventListener("resize", resizer)
+		window.addEventListener("orientationchange", resizer)
 	})
 }
